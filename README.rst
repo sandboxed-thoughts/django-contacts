@@ -17,6 +17,6 @@ Quick start
         "contacts",
     ]
 
-3. Run ``python manage.py migrate`` to create the models.
+2. Run ``python manage.py migrate`` to create the models.
 
-4. Start the development server and visit the admin to create a contact.
+3. Start the development server and visit the admin to create a contact.
