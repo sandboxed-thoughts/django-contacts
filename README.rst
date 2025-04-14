@@ -9,16 +9,13 @@ people including their contact information such as email addresses, phone number
 Quick start
 -----------
 
-1. Add "contacts" to your INSTALLED_APPS setting like this::
+1. Add "simple_history" and "contacts" to your INSTALLED_APPS setting like this::
 
     INSTALLED_APPS = [
         ...,
+        "simple_history",
         "contacts",
     ]
-
-2. Include the contacts URLconf in your project urls.py like this::
-
-    path("contacts/", include("contacts.urls")),
 
 3. Run ``python manage.py migrate`` to create the models.
 
