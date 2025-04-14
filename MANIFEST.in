@@ -1,0 +1,2 @@
+recursive-include contacts/static *
+recursive-include contacts/templates *

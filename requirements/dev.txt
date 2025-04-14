@@ -1,0 +1,15 @@
+# requirements/dev.txt
+
+# This file includes `base.txt` and extends the package list
+# to include python packages useful for local development.
+
+
+-r base.txt
+
+# https://black.readthedocs.io
+black
+# https://ipython.readthedocs.io
+ipython
+# https://pycqa.github.io/isort/
+isort
+build

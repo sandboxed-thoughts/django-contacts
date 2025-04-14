@@ -1,0 +1,13 @@
+# requirements/base.txt
+
+# These are the python packages required by all project environments.
+# Each package should have link to the documentation in a comment above it.
+
+# https://docs.djangoproject.com
+Django
+# https://django-localflavor.readthedocs.io
+django-localflavor
+# https://django-phonenumber-field.readthedocs.io
+django-phonenumber-field[phonenumbers]
+# https://django-simple-history.readthedocs.io
+django-simple-history
