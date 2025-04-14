@@ -9,11 +9,13 @@ people including their contact information such as email addresses, phone number
 Quick start
 -----------
 
-1. Add "simple_history" and "contacts" to your INSTALLED_APPS setting like this::
+1. Add the required apps to your INSTALLED_APPS setting like this::
 
     INSTALLED_APPS = [
         ...,
-        "simple_history",
+        "localflavor",
+        "phonenumber_field",
+        'simple_history',
         "contacts",
     ]
 
