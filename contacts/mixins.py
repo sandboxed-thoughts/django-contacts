@@ -201,7 +201,8 @@ class PersonMixin(models.Model):
         """Format and sanitize submitted data.
         """
         super().clean()
-        self.job_title = self.job_title.title()
+        if self.job_title:
+            self.job_title = self.job_title.title()
 
     class Meta:
         abstract = True
@@ -218,8 +219,8 @@ class EmailMixin(models.Model):
         email_label (models.CharField, optional): an optional label for identifying the email address
     """
 
+    name: models.CharField = models.CharField(_("email name"), max_length=25, blank=True, null=True)
     email_address: models.EmailField = models.EmailField(_("email address"), max_length=254, unique=True)
-    email_label: models.CharField = models.CharField(_("address name"), max_length=25, blank=True, null=True)
 
     def clean(self):
         """Format and sanitize submitted data.
