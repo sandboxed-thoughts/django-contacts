@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from simple_history.models import HistoricalRecords
 from .mixins import (
     ObjectTrackingMixin, USAddressMixin, PersonMixin,
@@ -22,6 +23,10 @@ class ContactAddress(ObjectTrackingMixin, USAddressMixin):
     contact = models.ForeignKey(Contact, related_name='contact_addresses', on_delete=models.CASCADE)
     """the assigned contact for the address"""
     history = HistoricalRecords()
+
+    class Meta:
+        verbose_name: str = _("contact address")
+        verbose_name_plural: str = _("contact addresses")
 
 
 class ContactPhoneNumber(ObjectTrackingMixin, PhoneNumberMixin):
