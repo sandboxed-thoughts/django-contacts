@@ -2,21 +2,9 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from .mixins import (
     ObjectTrackingMixin, USAddressMixin, PersonMixin,
-    EmailMixin, PhoneNumberMixin,
+    EmailMixin, PhoneNumberMixin, AbstractContact
 )
 
-
-class AbstractContact(ObjectTrackingMixin, PersonMixin):
-    """An abstract Contact model for importing into other pacakges.
-    """
-
-    class Meta:
-        abstract: bool = True
-        verbose_name: str = _("contact")
-        verbose_name_plural: str = _("contacts")
-
-    def __str__(self):
-        return self.full_name()
 
 
 class Contact(AbstractContact):

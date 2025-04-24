@@ -250,3 +250,18 @@ class PhoneNumberMixin(models.Model):
 
     def __str__(self) -> str:
         return self.phone_number
+
+
+
+
+class AbstractContact(ObjectTrackingMixin, PersonMixin):
+    """An abstract Contact model for importing into other pacakges.
+    """
+
+    class Meta:
+        abstract: bool = True
+        verbose_name: str = _("contact")
+        verbose_name_plural: str = _("contacts")
+
+    def __str__(self):
+        return self.full_name()
