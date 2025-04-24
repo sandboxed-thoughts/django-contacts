@@ -5,7 +5,6 @@ Django admin models for the contacts app
 
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
-from simple_history.admin import SimpleHistoryAdmin
 from .models import Contact, ContactAddress, ContactEmail, ContactPhoneNumber
 
 
@@ -21,7 +20,6 @@ class ContactAddressInline(admin.StackedInline):
     fieldsets = (
         (None, {
             "fields": (
-                'name',
                 'street',
                 ('city','state','zipcode',),
             ),
@@ -39,7 +37,7 @@ class ContactEmailInline(admin.StackedInline):
     fieldsets = (
         (None, {
             "fields": (
-                ('email_address', 'name',),
+                'email_address',
             ),
         }),
     )
@@ -55,7 +53,7 @@ class ContactPhoneNumberInline(admin.StackedInline):
     fieldsets = (
         (None, {
             "fields": (
-                ("phone_number", "name",),
+                "phone_number",
             ),
         }),
     )
@@ -63,7 +61,7 @@ class ContactPhoneNumberInline(admin.StackedInline):
 
 # Models
 
-class BaseAdmin(SimpleHistoryAdmin):
+class BaseAdmin(admin.ModelAdmin):
     """Provides standard save methods for the tracking fields `created_by` and `updated_by`
     """
     def save_formset(self, request, form, formset, change):
@@ -198,7 +196,7 @@ class ContactEmailAdmin(BaseAdmin):
         }),
         ("Email Address", {
             "fields": (
-                ('email_address', 'name',),
+                'email_address',
             )
         })
     )
@@ -219,7 +217,7 @@ class ContactPhoneNumberAdmin(BaseAdmin):
         }),
         ("Email Address", {
             "fields": (
-                ('email_address', 'name',),
+                'email_address',
             )
         })
     )

@@ -36,6 +36,9 @@ class ObjectTrackingMixin(models.Model):
     class Meta:
         abstract = True
 
+    def save(self, *args, **kwargs):
+        return super().save(*args, **kwargs)
+
 
 class USAddressMixin(models.Model):
     """A django model mixin for adding address information.
@@ -51,7 +54,6 @@ class USAddressMixin(models.Model):
         zipcode (USZipCodeField): The address' zipcode
     """
 
-    name: models.CharField = models.CharField(max_length=50, blank=True, null=True, help_text=_("a memberable name for the address"))
     street: models.CharField = models.CharField(_("street"), max_length=150, help_text=_("building number and street name"))
     unit_type: models.CharField = models.CharField(_("unit type"), max_length=20, help_text=_("P.O. Box, Unit, Suite, etc."), default="unit")
     unit_number: models.CharField = models.CharField(_("Unit number"), max_length=20, help_text=_("The assigned unit reference. This is typically a number"), blank=True, null=True)
@@ -86,6 +88,9 @@ class USAddressMixin(models.Model):
             bool: `self.unit_number is not None`
         """
         return self.unit_number is not None
+
+    class Meta:
+        abstract = True
 
     def unit(self) -> str:
         """A full unit line including the unit type and identification.
@@ -155,12 +160,7 @@ class USAddressMixin(models.Model):
     def __str__(self) -> str:
         """String representation of model instances.
         """
-        if self.name is not None:
-            return self.short_address(named=True)
         return self.short_address()
-
-    class Meta:
-        abstract = True
 
 
 class PersonMixin(models.Model):
@@ -219,8 +219,10 @@ class EmailMixin(models.Model):
         email_label (models.CharField, optional): an optional label for identifying the email address
     """
 
-    name: models.CharField = models.CharField(_("email name"), max_length=25, blank=True, null=True)
     email_address: models.EmailField = models.EmailField(_("email address"), max_length=254, unique=True)
+
+    class Meta:
+        abstract = True
 
     def clean(self):
         """Format and sanitize submitted data.
@@ -228,8 +230,8 @@ class EmailMixin(models.Model):
         super().clean()
         self.email_address = normalize_email(self.email_address)
 
-    class Meta:
-        abstract = True
+    def __str__(self):
+        return self.email_address
 
 
 class PhoneNumberMixin(models.Model):
@@ -239,11 +241,12 @@ class PhoneNumberMixin(models.Model):
     that will be used to relate multiple phone numbers to other models.
 
     Attributes:
-        name (models.CharField, optional): a label for identifying the phone number
         phone_number (PhoneNumberField): the phone number
     """
-    name: models.CharField = models.CharField(_("phone number name"), max_length=25, blank=True, null=True)
     phone_number: PhoneNumberField = PhoneNumberField()
 
     class Meta:
         abstract = True
+
+    def __str__(self) -> str:
+        return self.phone_number
