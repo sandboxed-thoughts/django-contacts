@@ -80,7 +80,6 @@ class BaseAdmin(admin.ModelAdmin):
         return super().save_model(request, obj, form, change)
 
 
-@admin.register(Contact)
 class ContactAdmin(BaseAdmin):
     list_display = ('full_name','job_title','created_on',)
     list_filter = ('job_title','created_on',)
